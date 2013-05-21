@@ -8,3 +8,10 @@ body {
 *:focus{
   outline:none;
 }
+
+#header {
+  color: #999;
+  position: fixed;
+  top: 0px;
+  margin: 20px 30px;
+}
