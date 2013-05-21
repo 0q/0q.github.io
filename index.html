@@ -17,8 +17,12 @@ window.onload = function(){
 <script id="processing-code" type="application/processing">
 void setup(){
 	size(window.innerWidth,window.innerHeight);
-	noSmooth();
-	background(0);
+	smooth();
+	background(255);
+	noStroke();
+	rectMode(CENTER);
+	ellipseMode(CENTER);
+	frameRate(30);
 	window.onresize = function()
 	{
 		size(window.innerWidth,window.innerHeight);
@@ -27,12 +31,61 @@ void setup(){
 	setup2();
 }
 
+Square test,test2;
+
 void setup2(){
 	console.log("on");
+	test= new Square([width/2, 100],[100,100]);
+	test2= new Square([width/2, height/2],[1200,1020]);
 }
 
+float r;
+
 void draw(){
-	background(0);
+	r+=0.01;
+	background(255);
+
+	fill(200);
+	ellipse(width/2, height/2, sqrt(20000),sqrt(20000));
+
+	fill(0);
+	pushMatrix();
+	test.rotater(r*10);
+	test.display();
+	popMatrix();
+
+	fill(210,10,10,19);
+	pushMatrix();
+	test2.rotater(r*10);
+	test2.display();
+	popMatrix();
+
+	pushMatrix();
+	fill(100);
+	translate(width/2, height/2);
+    rotate(r);
+    rect(0, 0, 60, 60);
+    popMatrix();
+}
+
+class Square {
+
+	float[] pos;
+	float[] sz;
+	
+	Square(float[] _pos, float[] _sz){
+		pos = _pos;
+		sz = _sz;
+	}
+
+	void rotater(int a){
+		translate(this.pos[0], this.pos[1]);
+		rotate(a);
+	}
+
+	void display(){
+		rect(0, 0, this.sz[0], this.sz[0]);
+	}
 }
 </script>
 </head>
